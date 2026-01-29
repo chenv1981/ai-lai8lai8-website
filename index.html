@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI导航 - 智能体集合网站 | 汇聚全球AI大模型</title>
+    <meta name="description" content="AI导航网 - 汇聚全球顶尖AI大模型和智能体的导航平台，提供ChatGPT、Claude、Midjourney、Stable Diffusion等AI工具的快速访问入口。">
+    <meta name="keywords" content="AI导航,AI工具,ChatGPT,Claude,Midjourney,Stable Diffusion,人工智能,大模型,智能体">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>AI导航</span>
+            </div>
+            <nav class="main-nav">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#category" class="nav-link">分类</a>
+                <a href="#tools" class="nav-link">工具</a>
+                <a href="#prompts" class="nav-link">提示词</a>
+                <a href="#about" class="nav-link">关于</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="globalSearch" placeholder="搜索AI工具...">
+                <button class="search-btn" onclick="performSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 搜索区域 -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    发现<span class="highlight">全球顶尖AI</span>
+                </h1>
+                <p class="hero-subtitle">
+                    汇聚ChatGPT、Claude、Midjourney等100+主流AI模型和智能体<br>
+                    一站式发现、探索、使用人工智能工具
+                </p>
+                <div class="search-wrapper">
+                    <div class="hero-search">
+                        <select id="searchCategory">
+                            <option value="all">全部</option>
+                            <option value="text">文本生成</option>
+                            <option value="image">图像生成</option>
+                            <option value="video">视频生成</option>
+                            <option value="code">代码辅助</option>
+                            <option value="audio">音频生成</option>
+                            <option value="3d">3D建模</option>
+                        </select>
+                        <input type="text" id="heroSearchInput" placeholder="搜索AI工具，如：ChatGPT、Midjourney...">
+                        <button class="hero-search-btn" onclick="heroSearch()">
+                            <i class="fas fa-search"></i>
+                            搜索
+                        </button>
+                    </div>
+                </div>
+                <div class="hot-searches">
+                    <span>热门搜索：</span>
+                    <a href="#" onclick="quickSearch('ChatGPT')">ChatGPT</a>
+                    <a href="#" onclick="quickSearch('Claude')">Claude</a>
+                    <a href="#" onclick="quickSearch('Midjourney')">Midjourney</a>
+                    <a href="#" onclick="quickSearch('Stable Diffusion')">Stable Diffusion</a>
+                    <a href="#" onclick="quickSearch('Cursor')">Cursor</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速访问区域 -->
+    <section class="quick-access">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-star"></i> 热门推荐</h2>
+                <a href="#category" class="view-all">查看全部 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="quick-cards" id="quickAccessGrid">
+                <!-- JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 分类区域 -->
+    <section class="categories" id="category">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-th-large"></i> AI工具分类</h2>
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="all">全部</button>
+                    <button class="tab-btn" data-category="text">文本</button>
+                    <button class="tab-btn" data-category="image">图像</button>
+                    <button class="tab-btn" data-category="video">视频</button>
+                    <button class="tab-btn" data-category="code">代码</button>
+                    <button class="tab-btn" data-category="audio">音频</button>
+                    <button class="tab-btn" data-category="3d">3D</button>
+                </div>
+            </div>
+            <div class="category-grid" id="categoryGrid">
+                <!-- JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI工具详情网格 -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> 所有AI工具</h2>
+                <div class="filter-options">
+                    <select id="sortBy">
+                        <option value="popular">热门排序</option>
+                        <option value="newest">最新发布</option>
+                        <option value="rating">评分排序</option>
+                    </select>
+                    <select id="priceFilter">
+                        <option value="all">全部价格</option>
+                        <option value="free">免费</option>
+                        <option value="freemium">免费增值</option>
+                        <option value="paid">付费</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tools-grid" id="toolsGrid">
+                <!-- JavaScript动态生成 -->
+            </div>
+            <div class="load-more">
+                <button class="load-more-btn" onclick="loadMoreTools()">
+                    <i class="fas fa-plus"></i> 加载更多
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实用工具区域 -->
+    <section class="tools-area" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-tools"></i> AI实用工具</h2>
+            </div>
+            <div class="utility-grid">
+                <div class="utility-card" onclick="openPromptGenerator()">
+                    <div class="utility-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>提示词生成器</h3>
+                    <p>AI辅助生成高质量提示词</p>
+                </div>
+                <div class="utility-card" onclick="openModelCompare()">
+                    <div class="utility-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>模型对比</h3>
+                    <p>对比不同AI模型的特点和价格</p>
+                </div>
+                <div class="utility-card" onclick="openAPIGuide()">
+                    <div class="utility-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>API使用指南</h3>
+                    <p>各平台API调用示例和文档</p>
+                </div>
+                <div class="utility-card" onclick="openCostCalculator()">
+                    <div class="utility-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>成本计算器</h3>
+                    <p>估算使用AI工具的成本</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 提示词模板区域 -->
+    <section class="prompts-section" id="prompts">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-lightbulb"></i> 提示词模板库</h2>
+                <a href="#" class="view-all">更多模板 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card" onclick="copyPrompt(this)" data-prompt="写一篇关于人工智能的文章，要求：1. 开头引人入胜 2. 包含实际案例 3. 结论有洞见 4. 字数800-1000字">
+                    <div class="prompt-category">写作</div>
+                    <h3>文章生成</h3>
+                    <p>生成高质量的文章、博客、报道</p>
+                    <div class="prompt-meta">
+                        <span><i class="fas fa-tag"></i> 通用</span>
+                        <span><i class="fas fa-copy"></i> 点击复制</span>
+                    </div>
+                </div>
+                <div class="prompt-card" onclick="copyPrompt(this)" data-prompt="设计一个Logo，要求：1. 简洁现代 2. 体现科技感 3. 使用蓝色和白色 4. 适合各种尺寸">
+                    <div class="prompt-category">设计</div>
+                    <h3>Logo设计</h3>
+                    <p>AI辅助设计Logo和品牌标识</p>
+                    <div class="prompt-meta">
+                        <span><i class="fas fa-tag"></i> 图像</span>
+                        <span><i class="fas fa-copy"></i> 点击复制</span>
+                    </div>
+                </div>
+                <div class="prompt-card" onclick="copyPrompt(this)" data-prompt="用Python实现一个爬虫程序，功能包括：1. 爬取网页内容 2. 解析HTML 3. 存储数据 4. 添加错误处理">
+                    <div class="prompt-category">编程</div>
+                    <h3>代码生成</h3>
+                    <p>生成各种编程语言的代码</p>
+                    <div class="prompt-meta">
+                        <span><i class="fas fa-tag"></i> 开发</span>
+                        <span><i class="fas fa-copy"></i> 点击复制</span>
+                    </div>
+                </div>
+                <div class="prompt-card" onclick="copyPrompt(this)" data-prompt="写一首关于春天的现代诗，要求：1. 意象丰富 2. 韵律优美 3. 表达希望和新生 4. 4-6节">
+                    <div class="prompt-category">创意</div>
+                    <h3>创意写作</h3>
+                    <p>诗歌、故事、创意内容生成</p>
+                    <div class="prompt-meta">
+                        <span><i class="fas fa-tag"></i> 文学</span>
+                        <span><i class="fas fa-copy"></i> 点击复制</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于区域 -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2><i class="fas fa-info-circle"></i> 关于AI导航</h2>
+                    <p>AI导航是一个致力于汇聚全球AI大模型和智能体的导航平台。我们收集整理了市场上主流的AI工具，包括但不限于：</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> 文本生成：ChatGPT、Claude、Gemini等</li>
+                        <li><i class="fas fa-check"></i> 图像生成：Midjourney、DALL-E、Stable Diffusion等</li>
+                        <li><i class="fas fa-check"></i> 视频生成：Sora、Runway、Pika等</li>
+                        <li><i class="fas fa-check"></i> 代码辅助：GitHub Copilot、Cursor等</li>
+                        <li><i class="fas fa-check"></i> 音频生成：Murf、ElevenLabs等</li>
+                    </ul>
+                    <p>我们的目标是帮助用户快速找到合适的AI工具，提高工作效率和生活品质。</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">AI工具</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">分类</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">提示词模板</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">活跃用户</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-brain"></i> AI导航</h4>
+                    <p>汇聚全球AI大模型和智能体的一站式导航平台</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#category">分类</a></li>
+                        <li><a href="#tools">工具</a></li>
+                        <li><a href="#prompts">提示词</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>分类导航</h4>
+                    <ul>
+                        <li><a href="#">文本生成</a></li>
+                        <li><a href="#">图像生成</a></li>
+                        <li><a href="#">视频生成</a></li>
+                        <li><a href="#">代码辅助</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p><i class="fas fa-envelope"></i> contact@ainav.cn</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 中国</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI导航 - 汇聚全球AI大模型 | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 模态框 -->
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">AI工具详情</h2>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
